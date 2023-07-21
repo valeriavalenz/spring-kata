@@ -2,22 +2,23 @@ package com.ss.web.app.service;
 
 import com.ss.web.app.model.Student;
 import com.ss.web.app.repository.StudentRepo;
-import com.ss.web.app.repository.StudentRepoImpl;
 import org.junit.jupiter.api.Test;
-import org.mockito.Mock;
-import org.springframework.beans.factory.annotation.Autowired;
+import static org.mockito.Mockito.*;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-class StudentServiceTest {
+class StudentServiceImplTest {
 
   @Test
   public void addStudent() {
-    StudentRepo repo = new StudentRepoImpl();
-    StudentService studentService = new StudentService(repo);
+    StudentRepo repo = mock(StudentRepo.class);
+    StudentServiceImpl studentServiceImpl = new StudentServiceImpl(repo);
     Student student = new Student(4L, "ana", "perez");
-    Student studentExpected = studentService.addStudent(student);
 
+    when(repo.save(student)).thenReturn(student);
+    Student studentExpected = studentServiceImpl.addStudent(student);
+
+    assertNotNull(studentExpected);
     assertEquals(student, studentExpected);
   }
 

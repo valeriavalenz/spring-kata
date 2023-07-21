@@ -1,29 +1,15 @@
 package com.ss.web.app.service;
 
 import com.ss.web.app.model.Student;
-import com.ss.web.app.repository.StudentRepo;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
 import java.util.List;
 
-@Service
-public class StudentService{
+public interface StudentService {
+  Student addStudent(Student student);
 
-  private List<Student> students;
-  private StudentRepo studentRepo;
+  List<Student> findAll();
 
-  public StudentService(StudentRepo studentRepo) {
-    this.students = new ArrayList<>();
-    this.studentRepo = studentRepo;
-  }
+  Student edit(Student student);
 
-  public Student addStudent(Student student){
-    return studentRepo.save(student);
-  }
-
-  public List<Student> findAll() {
-    return studentRepo.findAll();
-  }
+  boolean delete(Student student);
 }
