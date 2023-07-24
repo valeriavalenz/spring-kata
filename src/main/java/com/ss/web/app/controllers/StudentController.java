@@ -13,7 +13,7 @@ public class StudentController {
   @Autowired
   StudentService studentService;
 
-  @GetMapping
+  @GetMapping("/getStudents")
   public List<Student> getAll() {
     return studentService.findAll();
   }
